@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt #Library untuk visualisasi data
 
+from load_data import load_data
 
 st.set_page_config(page_title="Sentiment Analysis", layout="wide")
 
@@ -11,18 +12,13 @@ st.page_link("App.py", label="Home", icon="🏠")
 st.page_link("pages/1_Preprocessing.py", label="Page Preprocessing", icon="1️⃣")
 st.page_link("pages/2_Train_Test_Split.py", label="Page Split Data", icon="2️⃣")
 st.page_link("pages/3_TF_IDF_WordCloud.py", label="Page TF-IDF dan Word Cloud", icon="3️⃣")
+st.page_link("pages/4_Training_Model.py", label="Page Training Model dan Evaluasi", icon="4️⃣")
 
 st.title("HOME PAGE")
 st.markdown("Silakan pilih halaman di sidebar untuk eksplorasi lebih lanjut.")
 
 # Title
 st.title("Analisis Sentimen Film 🎬")
-
-# Load dataset dari folder 'dataset'
-@st.cache_data
-def load_data():
-    df = pd.read_csv("dataset/movie_dataset.csv")
-    return df
 
 df = load_data()
 st.success("Dataset berhasil dimuat dari folder `dataset/`.")

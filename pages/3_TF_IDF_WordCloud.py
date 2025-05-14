@@ -17,7 +17,9 @@ from nltk.stem import WordNetLemmatizer, PorterStemmer
 from bs4 import BeautifulSoup
 import emoji
 from wordcloud import WordCloud
+
 from split_data import split_data
+from load_data import load_data
 
 st.set_page_config(page_title="TF-IDF & Word Cloud", layout="wide")
 
@@ -25,13 +27,14 @@ st.page_link("App.py", label="Home", icon="🏠")
 st.page_link("pages/1_Preprocessing.py", label="Page Preprocessing", icon="1️⃣")
 st.page_link("pages/2_Train_Test_Split.py", label="Page Split Data", icon="2️⃣")
 st.page_link("pages/3_TF_IDF_WordCloud.py", label="Page TF-IDF dan Word Cloud", icon="3️⃣")
+st.page_link("pages/4_Training_Model.py", label="Page Training Model dan Evaluasi", icon="4️⃣")
 
 st.title("📊 TF-IDF dan WordCloud")
 st.write("Visualisasi komentar **positif** dan **netral** berdasarkan nilai TF-IDF dan menampilkan Word Cloud.")
 
 if st.button("🔍 Proses TF-IDF dan Tampilkan Diagram Batang & Word Cloud"):
     # Load dan split data
-    df = pd.read_csv("dataset/movie_dataset.csv")
+    df = load_data()
     X_train, X_test, y_train, y_test = split_data(df)
 
     # Filter komentar positif & netral
