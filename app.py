@@ -3,20 +3,17 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt #Library untuk visualisasi data
-import seaborn as sns
-from sklearn.model_selection import train_test_split #Library untuk membagi data
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
-from sklearn.feature_extraction.text import TfidfVectorizer
-import nltk
-import re
-import string
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer, PorterStemmer
-from bs4 import BeautifulSoup
-import emoji
-from wordcloud import WordCloud
+
+
+st.set_page_config(page_title="Sentiment Analysis", layout="wide")
+
+st.page_link("App.py", label="Home", icon="🏠")
+st.page_link("pages/1_Preprocessing.py", label="Page Preprocessing", icon="1️⃣")
+st.page_link("pages/2_Train_Test_Split.py", label="Page Split Data", icon="2️⃣")
+st.page_link("pages/3_TF_IDF_WordCloud.py", label="Page TF-IDF dan Word Cloud", icon="3️⃣")
+
+st.title("HOME PAGE")
+st.markdown("Silakan pilih halaman di sidebar untuk eksplorasi lebih lanjut.")
 
 # Title
 st.title("Analisis Sentimen Film 🎬")
