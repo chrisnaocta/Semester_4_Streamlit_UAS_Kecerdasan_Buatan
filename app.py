@@ -17,52 +17,53 @@ st.page_link("pages/4_Training_Model.py", label="Page Training Model dan Evaluas
 st.title("HOME PAGE")
 st.markdown("Silakan pilih halaman di sidebar untuk eksplorasi lebih lanjut.")
 
-# Title
-st.title("Analisis Sentimen Film 🎬")
+if st.button("📊 Menampilkan Exploratory Data Analysis (EDA)"):
+    # Title
+    st.title("Analisis Sentimen Film 🎬")
 
-df = load_data()
-st.success("Dataset berhasil dimuat dari folder `dataset/`.")
+    df = load_data()
+    st.success("Dataset berhasil dimuat dari folder `dataset/`.")
 
-# EDA Section
-st.markdown("## 📊 Exploratory Data Analysis (EDA)")
+    # EDA Section
+    st.markdown("## 📊 Exploratory Data Analysis (EDA)")
 
-# 1. Preview Data
-st.subheader("1. Preview Data (5 Baris Pertama)")
-st.dataframe(df.head())
+    # 1. Preview Data
+    st.subheader("1. Preview Data (5 Baris Pertama)")
+    st.dataframe(df.head())
 
-# 2. Info Dataset
-st.subheader("2. Informasi Struktur Dataset")
-buffer = open('info.txt', 'w')
-df.info(buf=buffer)
-buffer.close()
-with open("info.txt") as f:
-    st.text(f.read())
+    # 2. Info Dataset
+    st.subheader("2. Informasi Struktur Dataset")
+    buffer = open('info.txt', 'w')
+    df.info(buf=buffer)
+    buffer.close()
+    with open("info.txt") as f:
+        st.text(f.read())
 
-# 3. Distribusi Label
-st.subheader("3. Distribusi Label Sentimen")
-st.write(df['label'].value_counts())
+    # 3. Distribusi Label
+    st.subheader("3. Distribusi Label Sentimen")
+    st.write(df['label'].value_counts())
 
-# 4. Cek Data Null
-st.subheader("4. Jumlah Nilai Kosong (Null) per Kolom")
-st.write(df.isnull().sum())
+    # 4. Cek Data Null
+    st.subheader("4. Jumlah Nilai Kosong (Null) per Kolom")
+    st.write(df.isnull().sum())
 
-# 5. Pie Chart Distribusi Label
-st.subheader("5. Visualisasi Distribusi Label Sentimen (Pie Chart)")
-label_counts = df['label'].value_counts()
+    # 5. Pie Chart Distribusi Label
+    st.subheader("5. Visualisasi Distribusi Label Sentimen (Pie Chart)")
+    label_counts = df['label'].value_counts()
 
-def func(pct, allvalues):
-    absolute = int(np.round(pct / 100. * np.sum(allvalues)))
-    return f'{absolute} ({pct:.2f}%)'
+    def func(pct, allvalues):
+        absolute = int(np.round(pct / 100. * np.sum(allvalues)))
+        return f'{absolute} ({pct:.2f}%)'
 
-labels = [f'Label {i}: {label_counts[i]}' for i in label_counts.index]
+    labels = [f'Label {i}: {label_counts[i]}' for i in label_counts.index]
 
-fig, ax = plt.subplots(figsize=(6, 6))
-wedges, texts, autotexts = ax.pie(
-    label_counts,
-    labels=labels,
-    autopct=lambda pct: func(pct, label_counts),
-    startangle=140,
-    colors=['#ff9999', '#66b3ff']
-)
-ax.set_title("Distribusi Label Sentimen")
-st.pyplot(fig)
+    fig, ax = plt.subplots(figsize=(6, 6))
+    wedges, texts, autotexts = ax.pie(
+        label_counts,
+        labels=labels,
+        autopct=lambda pct: func(pct, label_counts),
+        startangle=140,
+        colors=['#ff9999', '#66b3ff']
+    )
+    ax.set_title("Distribusi Label Sentimen")
+    st.pyplot(fig)
