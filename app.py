@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt #Library untuk visualisasi data
+import io
 
 from load_data import load_data
 
@@ -33,11 +34,12 @@ if st.button("📊 Menampilkan Exploratory Data Analysis (EDA)"):
 
     # 2. Info Dataset
     st.subheader("2. Informasi Struktur Dataset")
-    buffer = open('info.txt', 'w')
+    # Tangkap hasil df.info() ke buffer
+    buffer = io.StringIO()
     df.info(buf=buffer)
-    buffer.close()
-    with open("info.txt") as f:
-        st.text(f.read())
+    info_str = buffer.getvalue()
+    # Tampilkan hasil di Streamlit dengan format code block
+    st.code(info_str, language='text')
 
     # 3. Distribusi Label
     st.subheader("3. Distribusi Label Sentimen")
